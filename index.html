@@ -35,5 +35,31 @@
         style="display: none; visibility: hidden"
       ></iframe
     ></noscript>
+    <!-- Offcanvas Side Cart -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+      <div class="cart-drawer-header">
+        <h3><i class="fa-solid fa-bag-shopping"></i> Tu Carrito</h3>
+        <button class="close-cart-btn" id="closeCartBtn">&times;</button>
+      </div>
+      <div class="cart-drawer-body" id="cartDrawerBody">
+        <p class="empty-cart-msg">El carrito está vacío</p>
+      </div>
+      <div class="cart-drawer-footer">
+        <div class="cart-subtotal">
+          <span>Subtotal:</span>
+          <span id="cartSubtotalAmount">$0,00</span>
+        </div>
+        <button class="checkout-btn" disabled>Finalizar Compra</button>
+      </div>
+    </aside>
+
+    <!-- Modal Vista Rápida -->
+    <div class="modal-overlay" id="productModalOverlay">
+      <div class="product-modal">
+        <button class="close-modal-btn" id="closeModalBtn">&times;</button>
+        <div class="modal-body" id="modalProductContent"></div>
+      </div>
+    </div>
   </body>
 </html>
