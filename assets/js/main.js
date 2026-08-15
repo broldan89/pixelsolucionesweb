@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   window.dataLayer = window.dataLayer || [];
 
+  // Estado y elementos del Carrito Lateral
   const cart = [];
   const cartBtn = document.querySelector(".cart-btn");
   const cartDrawer = document.getElementById("cartDrawer");
@@ -13,8 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const checkoutBtn = document.querySelector(".checkout-btn");
 
   const toggleCart = (open) => {
-    cartDrawer.classList.toggle("open", open);
-    cartOverlay.classList.toggle("active", open);
+    cartDrawer?.classList.toggle("open", open);
+    cartOverlay?.classList.toggle("active", open);
   };
 
   cartBtn?.addEventListener("click", (e) => {
@@ -26,13 +27,15 @@ document.addEventListener("DOMContentLoaded", () => {
   cartOverlay?.addEventListener("click", () => toggleCart(false));
 
   const renderCart = () => {
+    if (!cartDrawerBody) return;
+
     if (cart.length === 0) {
       cartDrawerBody.innerHTML =
         '<p class="empty-cart-msg">El carrito está vacío</p>';
-      cartSubtotalAmount.textContent = "$0,00";
-      cartTotalHeader.textContent = "$0,00";
-      cartBadge.textContent = "0";
-      checkoutBtn.disabled = true;
+      if (cartSubtotalAmount) cartSubtotalAmount.textContent = "$0,00";
+      if (cartTotalHeader) cartTotalHeader.textContent = "$0,00";
+      if (cartBadge) cartBadge.textContent = "0";
+      if (checkoutBtn) checkoutBtn.disabled = true;
       return;
     }
 
@@ -47,19 +50,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const itemEl = document.createElement("div");
       itemEl.className = "cart-item";
       itemEl.innerHTML = `
-                <div class="cart-item-details">
-                    <div class="cart-item-title">${item.name}</div>
-                    <div class="cart-item-price">${item.quantity} x $${item.price.toLocaleString("es-AR")}</div>
-                </div>
-                <button class="remove-item-btn" data-index="${index}"><i class="fa-solid fa-trash"></i></button>
-            `;
+        <div class="cart-item-details">
+            <div class="cart-item-title">${item.name}</div>
+            <div class="cart-item-price">${item.quantity} x $${item.price.toLocaleString("es-AR")}</div>
+        </div>
+        <button class="remove-item-btn" data-index="${index}"><i class="fa-solid fa-trash"></i></button>
+      `;
       cartDrawerBody.appendChild(itemEl);
     });
 
-    cartSubtotalAmount.textContent = `$${total.toLocaleString("es-AR")}`;
-    cartTotalHeader.textContent = `$${total.toLocaleString("es-AR")}`;
-    cartBadge.textContent = totalItems.toString();
-    checkoutBtn.disabled = false;
+    if (cartSubtotalAmount)
+      cartSubtotalAmount.textContent = `$${total.toLocaleString("es-AR")}`;
+    if (cartTotalHeader)
+      cartTotalHeader.textContent = `$${total.toLocaleString("es-AR")}`;
+    if (cartBadge) cartBadge.textContent = totalItems.toString();
+    if (checkoutBtn) checkoutBtn.disabled = false;
 
     document.querySelectorAll(".remove-item-btn").forEach((btn) => {
       btn.addEventListener("click", (e) => {
@@ -78,13 +83,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  // Evento Agregar al Carrito
   document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const card = e.target.closest(".product-card");
-      const name = card.querySelector(".product-name").textContent.trim();
-      const rawPrice = card
-        .querySelector(".current-price")
-        .textContent.replace(/[^0-9]/g, "");
+      if (!card) return;
+
+      const name =
+        card.querySelector(".product-name")?.textContent.trim() || "Producto";
+      const rawPrice =
+        card
+          .querySelector(".current-price")
+          ?.textContent.replace(/[^0-9]/g, "") || "0";
       const price = parseFloat(rawPrice);
 
       const existingItem = cart.find((item) => item.name === name);
@@ -103,17 +113,18 @@ document.addEventListener("DOMContentLoaded", () => {
       toggleCart(true);
     });
   });
-});
-// Actualización del rango de precios y disparo de evento
-const priceRange = document.getElementById("priceRange");
-const priceValue = document.getElementById("priceValue");
 
-priceRange?.addEventListener("input", (e) => {
-  const val = parseInt(e.target.value);
-  priceValue.textContent = `$${val.toLocaleString("es-AR")}`;
+  // Filtro Rango de Precio
+  const priceRange = document.getElementById("priceRange");
+  const priceValue = document.getElementById("priceValue");
 
-  window.dataLayer.push({
-    event: "filter_price_change",
-    max_price: val,
+  priceRange?.addEventListener("input", (e) => {
+    const val = parseInt(e.target.value);
+    if (priceValue) priceValue.textContent = `$${val.toLocaleString("es-AR")}`;
+
+    window.dataLayer.push({
+      event: "filter_price_change",
+      max_price: val,
+    });
   });
 });
