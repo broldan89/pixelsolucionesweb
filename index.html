@@ -35,6 +35,181 @@
         style="display: none; visibility: hidden"
       ></iframe
     ></noscript>
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="main-header">
+      <div class="container header-container">
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-cubes"></i></div>
+          <div class="logo-text">PIXEL <span>SOLUCIONES</span></div>
+        </a>
+
+        <div class="search-box">
+          <input
+            type="text"
+            placeholder="Buscar hardware, accesorios, componentes..."
+          />
+          <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <div class="user-actions">
+          <button class="action-btn" title="Favoritos">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <button class="cart-btn">
+            <div class="cart-icon-wrapper">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span class="cart-badge">0</span>
+            </div>
+            <div class="cart-info">
+              <span class="cart-title">Carrito</span>
+              <span class="cart-total">$0,00</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECCIÓN CATÁLOGO Y FILTROS -->
+    <section class="catalog-section">
+      <div class="container catalog-layout">
+        <!-- BARRA LATERAL DE FILTROS -->
+        <aside class="filters-sidebar">
+          <div class="filter-group">
+            <h4><i class="fa-solid fa-filter"></i> Categorías</h4>
+            <ul class="filter-list">
+              <li>
+                <label
+                  ><input type="checkbox" value="hardware" checked /> Hardware &
+                  PC</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input type="checkbox" value="perifericos" /> Periféricos &
+                  Audio</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input type="checkbox" value="monitores" /> Monitores &
+                  Pantallas</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input type="checkbox" value="conectividad" /> Redes &
+                  Conectividad</label
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="filter-group">
+            <h4><i class="fa-solid fa-dollar-sign"></i> Rango de Precio</h4>
+            <div class="price-range">
+              <input
+                type="range"
+                id="priceRange"
+                min="10000"
+                max="500000"
+                step="10000"
+                value="500000"
+              />
+              <div class="price-labels">
+                <span>$10.000</span>
+                <span id="priceValue">$500.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h4><i class="fa-solid fa-bolt"></i> Disponibilidad</h4>
+            <ul class="filter-list">
+              <li>
+                <label
+                  ><input type="checkbox" value="stock" checked /> En Stock
+                  Inmediato</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input type="checkbox" value="oferta" /> En Oferta
+                  Especial</label
+                >
+              </li>
+            </ul>
+          </div>
+        </aside>
+
+        <!-- GRILLA DE PRODUCTOS -->
+        <main class="catalog-content">
+          <div class="catalog-toolbar">
+            <span class="results-count"
+              >Mostrando <strong>2</strong> productos</span
+            >
+            <div class="sort-wrapper">
+              <label for="sortSelect">Ordenar por:</label>
+              <select id="sortSelect" class="glass-select">
+                <option value="popular">Más Relevantes</option>
+                <option value="price-low">Menor Precio</option>
+                <option value="price-high">Mayor Precio</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="products-grid" id="productsGrid">
+            <article
+              class="product-card"
+              data-category="hardware"
+              data-price="185000"
+            >
+              <div class="card-badge badge-discount">-15%</div>
+              <div class="product-img">
+                <i
+                  class="fa-solid fa-microchip"
+                  style="font-size: 48px; color: var(--neon-cyan)"
+                ></i>
+              </div>
+              <div class="product-info">
+                <span class="category-tag">Hardware</span>
+                <h3 class="product-name">Procesador Intel Core i7 13700K</h3>
+                <div class="product-pricing">
+                  <span class="current-price">$185.000</span>
+                </div>
+                <button class="add-to-cart-btn">
+                  <i class="fa-solid fa-cart-plus"></i> Agregar
+                </button>
+              </div>
+            </article>
+
+            <article
+              class="product-card"
+              data-category="perifericos"
+              data-price="45000"
+            >
+              <div class="product-img">
+                <i
+                  class="fa-solid fa-keyboard"
+                  style="font-size: 48px; color: var(--pixel-magenta)"
+                ></i>
+              </div>
+              <div class="product-info">
+                <span class="category-tag">Periféricos</span>
+                <h3 class="product-name">Teclado Mecánico RGB Pixel Pro</h3>
+                <div class="product-pricing">
+                  <span class="current-price">$45.000</span>
+                </div>
+                <button class="add-to-cart-btn">
+                  <i class="fa-solid fa-cart-plus"></i> Agregar
+                </button>
+              </div>
+            </article>
+          </div>
+        </main>
+      </div>
+    </section>
+
     <!-- Offcanvas Side Cart -->
     <div class="cart-overlay" id="cartOverlay"></div>
     <aside class="cart-drawer" id="cartDrawer">
@@ -61,5 +236,7 @@
         <div class="modal-body" id="modalProductContent"></div>
       </div>
     </div>
+
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

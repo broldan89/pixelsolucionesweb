@@ -104,3 +104,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+// Actualización del rango de precios y disparo de evento
+const priceRange = document.getElementById("priceRange");
+const priceValue = document.getElementById("priceValue");
+
+priceRange?.addEventListener("input", (e) => {
+  const val = parseInt(e.target.value);
+  priceValue.textContent = `$${val.toLocaleString("es-AR")}`;
+
+  window.dataLayer.push({
+    event: "filter_price_change",
+    max_price: val,
+  });
+});
